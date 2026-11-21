@@ -1,0 +1,5 @@
+/.slurm/
+/.venv/
+/pyFANTOM/
+__pycache__/
+*.pyc

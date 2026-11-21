@@ -1,0 +1,27 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "topax"
+backend = "gpu"
+elements = [512, 256, 256]
+resolution = "not_applicable"
+levels = 4
+galerkin_crossover_level = 3
+smoothing_steps = 1
+fine_grid_slab_size = 12
+galerkin_slab_size = 4
+precision = "float64"
+physics_tolerance = 1e-5
+filter_tolerance = "not_applicable"
+
+[measurements.runtime]
+design_iteration_limit = 20
+full_benchmark = true
+jax_preallocate = true
+jax_allocator = "default"
+jax_memory_fraction = 0.75
+
+[measurements.memory]
+design_iteration_limit = 10
+full_benchmark = false
+jax_preallocate = false
+jax_allocator = "address"

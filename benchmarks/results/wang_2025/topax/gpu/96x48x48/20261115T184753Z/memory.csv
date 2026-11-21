@@ -1,0 +1,2 @@
+design_iterations_completed,host_peak_rss_gib,gpu_baseline_gib,gpu_peak_gib,gpu_peak_above_baseline_gib
+10,0.94921875,0.0029296875,0.98046875,0.9775390625

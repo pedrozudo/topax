@@ -1,0 +1,25 @@
+diff --git a/pyFANTOM/solvers/CUDA/_solvers.py b/pyFANTOM/solvers/CUDA/_solvers.py
+index 378c1dc..5af09b8 100644
+--- a/pyFANTOM/solvers/CUDA/_solvers.py
++++ b/pyFANTOM/solvers/CUDA/_solvers.py
+@@ -636,8 +636,10 @@ class MultiGrid(Solver):
+         p = z.copy()
+         rho_old = cp.dot(r, z)
+         norm_b = cp.linalg.norm(rhs)
++        iterations = 0
+         
+         for i in range(self.maxiter):
++            iterations = i + 1
+             q = self.kernel.dot(p)
+             alpha = rho_old / cp.dot(p, q)
+             x += alpha * p
+@@ -665,6 +667,9 @@ class MultiGrid(Solver):
+ 
+         # report the true residual, not the recurrence estimate
+         residual = float(cp.linalg.norm(rhs - self.kernel.dot(x)) / norm_b)
++        self.last_iterations = iterations
++        self.last_residual = residual
++        self.last_converged = residual < self.tol
+         
+         self.last_x0 = x
+         

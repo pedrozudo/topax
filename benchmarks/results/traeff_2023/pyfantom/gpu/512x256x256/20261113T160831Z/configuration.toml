@@ -1,0 +1,44 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "pyfantom"
+implementation_version = "0.1.0"
+source_revision = "ffa4c95f087f86933629cb1926030b80501c3136"
+instrumentation_patch = "record_pcg_state.patch"
+backend = "gpu"
+elements = [512, 256, 256]
+levels = 4
+coarsenings = 3
+cycle = "W"
+w_cycle_level = 1
+smoothing_steps = 3
+jacobi_damping = 0.5
+minimum_jacobi_damping = 0.4
+coarse_solver = "CHOLMOD"
+precision = "float64"
+physics_tolerance = 1e-5
+physics_max_iterations = 1000
+filter = "linear density filter"
+filter_radius_elements = 1.5
+volume_fraction = 0.1
+simp_penalty = 3
+minimum_relative_stiffness = 1e-6
+python_version = "3.9.25"
+numpy_version = "2.0.2"
+scipy_version = "1.13.1"
+cupy_version = "13.6.0"
+scikit_sparse_version = "0.4.16"
+
+[measurements.runtime]
+design_iteration_limit = 20
+full_benchmark = true
+cupy_allocator = "default_memory_pool"
+explicit_memory_preallocation = false
+release_unused_pool_blocks_after_linear_solve = true
+
+[measurements.memory]
+design_iteration_limit = 10
+full_benchmark = false
+cupy_allocator = "default_memory_pool"
+explicit_memory_preallocation = false
+release_unused_pool_blocks_after_linear_solve = true
+sampling_interval_seconds = 0.2

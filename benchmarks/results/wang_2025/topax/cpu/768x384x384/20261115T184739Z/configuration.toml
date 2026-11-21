@@ -1,0 +1,26 @@
+schema_version = 2
+benchmark = "wang_2025"
+implementation = "topax"
+backend = "cpu"
+elements = [768, 384, 384]
+resolution = "768"
+levels = 4
+galerkin_crossover_level = 3
+smoothing_steps = 1
+fine_grid_slab_size = 12
+galerkin_slab_size = 4
+precision = "float64"
+physics_tolerance = 1e-3
+filter_tolerance = 1e-4
+filter = "TOP3D_XL PDE sensitivity filter"
+filter_discretization = "released TOP3D_XL element operator"
+filter_radius_elements = 1.7320508075688772
+equivalent_topax_helmholtz_radius_elements = 2.449489742783178
+
+[measurements.runtime]
+design_iteration_limit = 50
+full_benchmark = true
+
+[measurements.memory]
+design_iteration_limit = 50
+full_benchmark = true

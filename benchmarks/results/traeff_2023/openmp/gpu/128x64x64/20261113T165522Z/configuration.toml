@@ -1,0 +1,34 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "openmp"
+implementation_version = "0.9.1"
+source_revision = "b46ed453ad5a05818b563e540ce176c9d85c6fe2"
+backend = "openmp_target_cuda"
+elements = [128, 64, 64]
+levels = 4
+coarsenings = 3
+coarse_operator = "multiresolution approximation"
+cpu_resident_coarse_levels = 2
+coarse_solver = "CHOLMOD"
+precision = "mixed_float32_float64"
+physics_tolerance = 1e-5
+physics_max_iterations = 999
+filter = "linear density filter"
+filter_radius_elements = 1.5
+volume_fraction = 0.1
+simp_penalty = 3
+compiler = "nvc 25.9-0 linuxarm64 target on aarch64 Linux -tp neoverse-v2 "
+compiler_module = "GPU/buildenv-nvhpc/25.9-cu13.0"
+gpu_architecture = "cc90"
+offload_memory_mode = "separate"
+cpu_threads = 12
+
+[measurements.memory]
+design_iteration_limit = 20
+full_benchmark = false
+bounded_measurement = true
+measurement_duration_seconds = 180
+steady_state_delay_seconds = 30
+gpu_sampling_interval_seconds = 0.2
+host_sampling_interval_seconds = 0.2
+host_metric = "application process RSS"

@@ -1,0 +1,26 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "topax"
+backend = "gpu"
+elements = [256, 128, 128]
+resolution = "not_applicable"
+levels = 4
+galerkin_crossover_level = 2
+smoothing_steps = 1
+fine_grid_slab_size = 12
+galerkin_slab_size = 4
+precision = "float64"
+physics_tolerance = 1e-5
+filter_tolerance = "not_applicable"
+
+[measurements.steady_memory]
+design_iteration_limit = 20
+full_benchmark = true
+variants = ["natural", "release_initialization_memory"]
+host_metric = "sampled Python process RSS"
+host_sampling_interval_seconds = 0.2
+gpu_sampling_interval_seconds = 0.2
+gpu_baseline_corrected = true
+steady_phase = "post-warmup design iterations"
+jax_preallocate = false
+jax_allocator = "address"

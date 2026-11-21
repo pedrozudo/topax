@@ -1,0 +1,31 @@
+schema_version = 2
+benchmark = "wang_2025"
+implementation = "topax"
+backend = "gpu"
+elements = [800, 400, 400]
+resolution = "800"
+levels = 5
+galerkin_crossover_level = 4
+smoothing_steps = 1
+fine_grid_slab_size = 12
+galerkin_slab_size = 4
+precision = "float64"
+physics_tolerance = 1e-3
+filter_tolerance = 1e-4
+filter = "TOP3D_XL PDE sensitivity filter"
+filter_discretization = "released TOP3D_XL element operator"
+filter_radius_elements = 1.7320508075688772
+equivalent_topax_helmholtz_radius_elements = 2.449489742783178
+
+[measurements.runtime]
+design_iteration_limit = 50
+full_benchmark = true
+jax_preallocate = true
+jax_allocator = "default"
+jax_memory_fraction = 0.75
+
+[measurements.memory]
+design_iteration_limit = 10
+full_benchmark = false
+jax_preallocate = false
+jax_allocator = "address"

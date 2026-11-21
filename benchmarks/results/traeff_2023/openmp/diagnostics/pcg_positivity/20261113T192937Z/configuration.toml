@@ -1,0 +1,15 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "openmp"
+implementation_version = "0.9.1"
+source_revision = "b46ed453ad5a05818b563e540ce176c9d85c6fe2"
+diagnostic_patch = "pcg_positivity_trace.patch"
+purpose = "pcg_preconditioner_positivity"
+backend = "openmp_target_cuda"
+elements = [128, 64, 64]
+levels = 4
+physics_tolerance = 1e-5
+expected_failure_exit_status = 86
+compiler = "nvc 25.9-0 linuxarm64 target on aarch64 Linux -tp neoverse-v2 "
+compiler_module = "GPU/buildenv-nvhpc/25.9-cu13.0"
+cpu_threads = 12

@@ -1,0 +1,37 @@
+diff --git a/stencil_solvers.c b/stencil_solvers.c
+index ae4e779..b3fc531 100644
+--- a/stencil_solvers.c
++++ b/stencil_solvers.c
+@@ -268,6 +268,9 @@ void solveStateMG_halo(const struct gpuGrid * gpu_gc, DTYPE *x, const int nswp,
+ 
+   const uint_fast32_t ndof = 3 * gc->wrapx * gc->wrapy * gc->wrapz;
+ 
++  static int diagnostic_solve_counter = 0;
++  const int diagnostic_solve = ++diagnostic_solve_counter;
++
+   CTYPE *r = data->r;
+   CTYPE *p = data->p;
+   CTYPE *q = data->q;
+@@ -347,6 +350,21 @@ void solveStateMG_halo(const struct gpuGrid * gpu_gc, DTYPE *x, const int nswp,
+ 
+       rho = innerProduct(r, z, ndof);
+ 
++      fprintf(stderr,
++              "PCG_PRECONDITIONER solve=%d iteration=%d rz=%.9e\n",
++              diagnostic_solve, iter + 1, (double)rho);
++      fflush(stderr);
++
++      if (!isfinite((double)rho) || rho <= 0.0) {
++        fprintf(stderr,
++                "PCG_POSITIVITY_FAILURE solve=%d iteration=%d rz=%.9e\n",
++                diagnostic_solve, iter + 1, (double)rho);
++        fflush(stderr);
++        if (getenv("TOP3D_ABORT_ON_NONPOSITIVE_RZ") != NULL) {
++          exit(86);
++        }
++      }
++
+       if (iter == 0) {
+ 
+         #pragma omp target teams distribute parallel for schedule(static)
+

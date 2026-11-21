@@ -1,0 +1,56 @@
+diff --git a/futtop.c b/futtop.c
+index 4c36449..3c8dd67 100644
+--- a/futtop.c
++++ b/futtop.c
+@@ -161,7 +161,5 @@ void top3dmgcg(const uint_fast32_t nelx, const uint_fast32_t nely,
+ 
+   struct futhark_opaque_multigridData *mgData = NULL;
+-  int filenumber = 0;
+-  int file_freq = 1;
+ 
+   /* %% START ITERATION */
+   while ((change > 1e-2) && (loop < iters)) {
+@@ -190,19 +188,5 @@ void top3dmgcg(const uint_fast32_t nelx, const uint_fast32_t nely,
+     const double solveTime = getTime() - interTime;
+ 
+-    if (loop % file_freq == 0) {
+-      err = futhark_values_f32_4d(fut_ctx, u_gpu, U);
+-      handle_fut_err(fut_ctx, err);
+-      err = futhark_values_f32_3d(fut_ctx, xPhys_gpu, x);
+-      handle_fut_err(fut_ctx, err);
+-      err = futhark_context_sync(fut_ctx);
+-      handle_fut_err(fut_ctx, err);
+-
+-      char filename[50];
+-      sprintf(filename, "designstep_%d.vtr", filenumber);
+-      filenumber++;
+-      writeDensityAndDisplacement(nelx, nely, nelz, x, U, filename);
+-    }
+-
+     // clear uneeded data
+     err = futhark_free_opaque_multigridData(fut_ctx, mgData);
+     handle_fut_err(fut_ctx, err);
+@@ -245,11 +229,6 @@ void top3dmgcg(const uint_fast32_t nelx, const uint_fast32_t nely,
+ 
+   printf("End time: %6.3f \n", getTime() - totalTime);
+ 
+-  err = futhark_values_f32_3d(fut_ctx, xPhys_gpu, x);
+-  handle_fut_err(fut_ctx, err);
+-  err = futhark_context_sync(fut_ctx);
+-  handle_fut_err(fut_ctx, err);
+-
+   err = futhark_free_f32_4d(fut_ctx, force_gpu);
+   handle_fut_err(fut_ctx, err);
+   err = futhark_free_f32_3d(fut_ctx, xPhys_gpu);
+@@ -264,10 +243,6 @@ void top3dmgcg(const uint_fast32_t nelx, const uint_fast32_t nely,
+   futhark_context_free(fut_ctx);
+   futhark_context_config_free(fut_cfg);
+ 
+-  char filename[50];
+-  sprintf(filename, "designstep_%d.vtr", filenumber);
+-  writeDensityAndDisplacement(nelx, nely, nelz, x, F, filename);
+-
+   // writeDensity(nelx, nely, nelz, x, "output.vtr");
+   free(x);
+   free(F);
+

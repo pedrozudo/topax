@@ -1,0 +1,43 @@
+schema_version = 2
+benchmark = "traeff_2023"
+implementation = "futtop"
+implementation_version = "0.9.1"
+source_revision = "c3cd2b00632ad57cd3d8917246552b2fb4e99e01"
+output_patch = "disable_vtr_output.patch"
+backend = "opencl_gpu"
+elements = [512, 256, 256]
+levels = 4
+coarsenings = 3
+cycle = "V"
+first_coarsened_grid_active = false
+smoother = "nodal symmetric successive over-relaxation"
+sor_damping = 0.6
+pre_smoothing_steps = 1
+post_smoothing_steps = 1
+coarse_solver = "fixed-iteration Jacobi-preconditioned conjugate gradients"
+coarse_solver_iterations = 800
+precision = "mixed_float32_float64"
+physics_tolerance = 1e-5
+physics_max_iterations = 200
+filter = "linear density filter"
+filter_radius_elements = 1.5
+volume_fraction = 0.1
+simp_penalty = 3
+minimum_relative_stiffness = 1e-6
+optimality_criteria_move_limit = 0.1
+futhark_version = "Futhark 0.21.11"
+futhark_revision = "662b2221cfe846f94b7d4521ca2b5e419fe69223"
+c_compiler = "cc (GCC) 11.5.0 20240719 (Red Hat 11.5.0-14)"
+
+[measurements.runtime]
+design_iteration_limit = 20
+full_benchmark = true
+device_allocator = "Futhark OpenCL runtime"
+explicit_memory_preallocation = false
+
+[measurements.memory]
+design_iteration_limit = 10
+full_benchmark = false
+device_allocator = "Futhark OpenCL runtime"
+explicit_memory_preallocation = false
+sampling_interval_seconds = 0.2

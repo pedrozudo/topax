@@ -1,0 +1,37 @@
+schema_version = 2
+benchmark = "wang_2025"
+implementation = "top3d_xl"
+source_revision = "46a631fb631da1673de72c0ec17a318b0a2a4e41"
+headless_patch = "headless_benchmark.patch"
+backend = "cpu"
+elements = [800, 400, 400]
+resolution = "800"
+levels = 4
+hierarchy_selection = "adaptive"
+coarsest_element_target = 50000
+first_coarsening_factor = 4
+subsequent_coarsening_factor = 2
+cycle = "adapted V-cycle"
+jacobi_damping = 0.6
+coarse_solver = "MATLAB sparse Cholesky"
+precision = "float64"
+physics_tolerance = 1e-3
+physics_max_iterations = 800
+filter = "PDE sensitivity filter"
+filter_radius_elements = 1.7320508075688772
+filter_tolerance = 1e-4
+volume_fraction = 0.12
+simp_penalty = 3
+minimum_relative_stiffness = 1e-6
+optimality_criteria_move_limit = 0.2
+matlab_version = "25.2.0.2998904 (R2025b)"
+cpu_threads = 32
+
+[measurements.runtime]
+design_iteration_limit = 50
+full_benchmark = true
+
+[measurements.memory]
+design_iteration_limit = 50
+full_benchmark = true
+host_metric = "process peak RSS"

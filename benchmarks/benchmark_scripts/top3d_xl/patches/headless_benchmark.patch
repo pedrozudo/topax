@@ -1,0 +1,14 @@
+diff --git a/TOP3D_XL.m b/TOP3D_XL.m
+index dfb5275..df4c120 100644
+--- a/TOP3D_XL.m
++++ b/TOP3D_XL.m
+@@ -181,6 +181,8 @@ function TOP3D_XL_TO(inputModel, V0, nLoop, rMin)
+ 			's; Opti.: ', sprintf('%8.2e',itimeOptimization), 's; Filtering: ', sprintf('%8.2e',itimeDensityFiltering) 's.']);			
+ 	end
+ 	
++	return; %% Skip export and visualization for headless benchmarking.
++
+ 	%%Output
+ 	densityLayout_ = xPhys(:);
+ 	fileName = strcat(outPath, 'DesignVolume.nii');
+

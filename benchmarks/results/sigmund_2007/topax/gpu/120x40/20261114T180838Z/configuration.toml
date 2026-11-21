@@ -1,0 +1,31 @@
+schema_version = 2
+benchmark = "sigmund_2007"
+implementation = "topax"
+backend = "gpu"
+elements = [120, 40]
+levels = 2
+galerkin_crossover_level = 1
+precision = "float64"
+physics_tolerance = 1e-10
+physics_max_iterations = 500
+jacobi_damping = 0.8
+optimization_method = "MMA"
+filter = "linear density convolution"
+filter_radius_elements = 3.5
+volume_fraction = 0.5
+simp_penalty = 3
+minimum_relative_stiffness = 1e-9
+gpu_name = "NVIDIA GeForce RTX 4090"
+
+[measurements.runtime]
+design_iteration_limit = 10000
+full_benchmark = true
+jax_preallocate = true
+jax_allocator = "default"
+jax_memory_fraction = 0.75
+
+[measurements.memory]
+design_iteration_limit = 10
+full_benchmark = false
+jax_preallocate = false
+jax_allocator = "address"
